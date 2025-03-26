@@ -24,6 +24,9 @@
 # Maintainer: Pellegrino Prevete (dvorak) <pellegrinoprevete@gmail.com>
 # Maintainer: Pellegrino Prevete (dvorak) <dvorak@0x87003Bd6C074C713783df04f36517451fF34CBEf>
 
+_os="$( \
+  uname \
+    -o)"
 _evmfs_available="$( \
   command \
     -v \
@@ -52,12 +55,13 @@ _pkgdesc=(
 )
 arch=(
   'x86_64'
-  'i686'
-  'arm'
-  'armv7l'
+  # Needs 64-bit lseek
+  # 'i686'
+  # 'arm'
+  # 'armv7l'
+  # 'pentium4'
   'aarch64'
   'mips'
-  'pentium4'
   'powerpc'
 )
 _http="https://github.com"
@@ -135,6 +139,21 @@ validpgpkeys=(
 )
 
 build() {
+  local \
+    _cmake_opts=() \
+    _cxxflags=()
+  _cxxflags+=(
+    $CXXFLAGS
+  )
+  _cmake_opts+=(
+    -G
+      "Ninja"
+  )
+  if [[ "${_os}" == "Android" ]]; then
+    _cxxflags+=(
+      -Wno-deprecated-declarations 
+    )
+  fi
   cd \
     "${_tarname}"
   mkdir \
@@ -142,10 +161,10 @@ build() {
     "build"
   cd \
     "build"
+  CXXFLAGS="${_cxxflags[*]}" \
   cmake \
-    -G \
-      "Ninja" \
-    ..
+    "${_cmake_opts[@]}" \
+    ".."
   ninja
 }
 
