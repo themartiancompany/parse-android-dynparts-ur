@@ -43,7 +43,7 @@ _py="python"
 _pkg=sdat2img
 pkgname="${_pkg}"
 pkgver=1.2
-_commit="c99e13b9a461129c84f481686c462a522ebc8cc8"
+_commit="b432c988a412c06ff24d196132e354712fc18929"
 pkgrel=1
 _pkgdesc=(
   "Convert sparse Android data"
@@ -74,10 +74,10 @@ fi
 _evmfs_network="100"
 _evmfs_address="0x69470b18f8b8b5f92b48f6199dcb147b4be96571"
 _evmfs_ns="0x87003Bd6C074C713783df04f36517451fF34CBEf"
-_archive_sum="f5e638408b79c3253513778e461ca90a5a5a3527c4290e9c3ce81842d664b75d"
+_archive_sum="1726d41b51b52bec0e1a2d8ead80b220cda469ce95fcaca555a74e88531bb9e1"
 _evmfs_archive_uri="evmfs://${_evmfs_network}/${_evmfs_address}/${_evmfs_ns}/${_archive_sum}"
 _evmfs_archive_src="${_tarname}.zip::${_evmfs_archive_uri}"
-_archive_sig_sum="141451a129e92ec6c13a0613cdabf766f21c07d28bc80bd8b35795a32c23df6b"
+_archive_sig_sum="def6eae69f6f0aef4edec7a1f96fed770b4c17f41f0c91f2627bef4cdfcb1028"
 _archive_sig_uri="evmfs://${_evmfs_network}/${_evmfs_address}/${_evmfs_ns}/${_archive_sig_sum}"
 _archive_sig_src="${_tarname}.zip.sig::${_archive_sig_uri}"
 if [[ "${_evmfs}" == "true" ]]; then
