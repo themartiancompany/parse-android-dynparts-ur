@@ -74,10 +74,10 @@ fi
 _evmfs_network="100"
 _evmfs_address="0x69470b18f8b8b5f92b48f6199dcb147b4be96571"
 _evmfs_ns="0x87003Bd6C074C713783df04f36517451fF34CBEf"
-_archive_sum="5bb71ffe12bda6ed2a03851295cff32498de07b0f1305e5a9926027444208c25"
+_archive_sum="f5e638408b79c3253513778e461ca90a5a5a3527c4290e9c3ce81842d664b75d"
 _evmfs_archive_uri="evmfs://${_evmfs_network}/${_evmfs_address}/${_evmfs_ns}/${_archive_sum}"
 _evmfs_archive_src="${_tarname}.zip::${_evmfs_archive_uri}"
-_archive_sig_sum='bd2bd7d65233ac2714dbde8d0ad5cee70f6dcbab97e7ac427a2568c53389f812'
+_archive_sig_sum="141451a129e92ec6c13a0613cdabf766f21c07d28bc80bd8b35795a32c23df6b"
 _archive_sig_uri="evmfs://${_evmfs_network}/${_evmfs_address}/${_evmfs_ns}/${_archive_sig_sum}"
 _archive_sig_src="${_tarname}.zip.sig::${_archive_sig_uri}"
 if [[ "${_evmfs}" == "true" ]]; then
@@ -130,4 +130,3 @@ package() {
     "${_pkg}.py" \
     "${pkgdir}/usr/bin/${_pkg}"
 }
-f5e638408b79c3253513778e461ca90a5a5a3527c4290e9c3ce81842d664b75d  sdat2img-c99e13b9a461129c84f481686c462a522ebc8cc8.zip
