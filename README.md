@@ -19,7 +19,7 @@
 [comment]: <> (License along with this program.)
 [comment]: <> (If not, see <https://www.gnu.org/licenses/>.)
 
-# `sdat2img`
+# `parse-android-dynparts`
 
 universal recipe for
 [user repo](

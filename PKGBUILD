@@ -23,7 +23,6 @@
 # Maintainer: Truocolo <truocolo@0x6E5163fC4BFc1511Dbe06bB605cc14a3e462332b>
 # Maintainer: Pellegrino Prevete (dvorak) <pellegrinoprevete@gmail.com>
 # Maintainer: Pellegrino Prevete (dvorak) <dvorak@0x87003Bd6C074C713783df04f36517451fF34CBEf>
-# Maintainer: willemw <willemw12@gmail.com>
 
 _evmfs_available="$( \
   command \
@@ -40,28 +39,40 @@ fi
 _offline="false"
 _git="false"
 _py="python"
-_pkg=sdat2img
+_pkg=parse-android-dynparts
 pkgname="${_pkg}"
-pkgver=1.2
-_commit="b432c988a412c06ff24d196132e354712fc18929"
+pkgver=2021.4.14
+_commit="c8837c1cd0c4fbc29641980b71079fc4f3cabcc0"
 pkgrel=1
 _pkgdesc=(
-  "Convert sparse Android data"
-  "image to filesystem image"
+  "Allows mounting Android"
+  "Dynamic Partitions (a.k.a."
+  "super.img) files on Linux"
+  "using \"dmsetup create\"."
 )
 arch=(
-  'any'
+  'x86_64'
+  'i686'
+  'arm'
+  'armv7l'
+  'aarch64'
+  'mips'
+  'pentium4'
+  'powerpc'
 )
 _http="https://github.com"
-_ns="xpirt"
+_ns="tchebb"
 url="${_http}/${_ns}/${_pkg}"
 license=(
   'Apache'
 )
 depends=(
-  "${_py}"
+  "openssl"
 )
-makedepends=()
+makedepends=(
+  "cmake"
+  "ninja"
+)
 source=()
 sha256sums=()
 _url="${url}"
@@ -74,7 +85,7 @@ fi
 _evmfs_network="100"
 _evmfs_address="0x69470b18f8b8b5f92b48f6199dcb147b4be96571"
 _evmfs_ns="0x87003Bd6C074C713783df04f36517451fF34CBEf"
-_archive_sum="1726d41b51b52bec0e1a2d8ead80b220cda469ce95fcaca555a74e88531bb9e1"
+_archive_sum="4028593fca7bc1b8355436f29534bb53c78acbb1b39dc462237c917e151c50ab"
 _evmfs_archive_uri="evmfs://${_evmfs_network}/${_evmfs_address}/${_evmfs_ns}/${_archive_sum}"
 _evmfs_archive_src="${_tarname}.zip::${_evmfs_archive_uri}"
 _archive_sig_sum="def6eae69f6f0aef4edec7a1f96fed770b4c17f41f0c91f2627bef4cdfcb1028"
@@ -122,11 +133,32 @@ validpgpkeys=(
   '12D8E3D7888F741E89F86EE0FEC8567A644F1D16'
 )
 
+build() {
+  cd \
+    "${_tarname}"
+  mkdir \
+    -p \
+    "build"
+  cd \
+    "build"
+  cmake \
+    -G \
+      "Ninja" \
+    ..
+  ninja
+}
+
 package() {
   cd \
     "${_tarname}"
   install \
-    -Dm755 \
-    "${_pkg}.py" \
+    -vDm644 \
+    "LICENSE" \
+    "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
+  cd \
+    "build"
+  install \
+    -vDm755 \
+    "${_pkg}" \
     "${pkgdir}/usr/bin/${_pkg}"
 }
